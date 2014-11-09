@@ -33,14 +33,36 @@ module battery_box() {
 			]);
 		}
 	}
-
 }
 
 module base() {
+	difference() {
+
+		translate([0, -1 * wheel_dia/2, 0])
 		cube([
 			base_width,
-			base_height,
+			base_height + wheel_dia/2,
 			base_thick]);
+
+		difference() {
+			translate([0, -1 * wheel_dia/2, 0])
+			cube([
+				base_width,
+				wheel_dia/2 + shaft_offset + 18,
+				base_thick
+			]);
+			hull() {
+			translate([base_width/2, shaft_offset, 0])
+				cylinder(h=base_thick, d=wheel_dia - wheel_guard * 2);
+			translate([0, wheel_dia/2 + shaft_offset + 10 + wall_thick, 0])
+				cube([
+					base_width,
+					2,
+					base_thick
+				]);
+			}
+		}
+	}
 }
 
 module motor_mount_holes() {
@@ -90,6 +112,11 @@ module base_mounting_holes() {
 			translate([0,0,2*mount_hole_base_thick/3])
 			cylinder(h=base_thick/3, d=motor_mount_holes_dia * 2);
 		}
+		translate([0, -1 * mount_hole_radius, 0]){
+			cylinder(h=base_thick, d=3);
+			translate([0,0,2*mount_hole_base_thick/3])
+			cylinder(h=base_thick/3, d=motor_mount_holes_dia * 2);
+		}
 	}
 }
 
@@ -111,20 +138,6 @@ module motor_box() {
 				base_height,
 				wheel_height + wheel_guard
 			]);
-			if(0)
-			difference() {
-				translate([wall_thick, 0, 0])
-				cube([
-					base_width - wall_thick*2,
-					base_height,
-					40
-				]);
-
-				translate([base_width/2, shaft_offset, 0]) {
-					cylinder( h = wheel_height + wheel_guard, r = wheel_dia/2 + 10 + wall_thick);
-				}	
-			}
-
 		}
 	}
 }
@@ -189,7 +202,6 @@ module box() {
 	if (show_battery_box) {
 		battery_box();
 	}
-
 }
 
 box();

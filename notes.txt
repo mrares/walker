@@ -1,0 +1,19 @@
+MOTOR:
+Diameter: 27.7mm
+Body H : 26mm (exc. mount!)
+Body-shaft nut H: ?
+Shaft H: 10mm
+
+Total H: 41mm
+
+EST! RPM: 7200
+
+
+
+WHEEL:
+D: 52-56mm
+(Circ): 175mm
+H: 36-38mm
+
+pulleys: 
+est ratio 1/12.6 reduction
