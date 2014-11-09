@@ -68,6 +68,7 @@ module base() {
 module motor_mount_holes() {
 	translate (motor_center) translate([0,0,-1 * base_thick]) {
 		//Center hole
+		translate([0,0,base_thick/2])
 		cylinder(h=base_thick, d=motor_mount_centerhole_dia);
 
 		translate([motor_mount_holes_dist/2,0,0]) {
