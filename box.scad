@@ -1,7 +1,8 @@
 include <constants.scad>
 include <hexagon.scad>
 
-show_motor_box = 1;
+hide_motor_box = 0;
+wheel_hub_nut = 0;
 
 module battery_box() {
 	translate([0, base_height, 0])
@@ -184,14 +185,15 @@ module box() {
 		// Wheel center hole
 		wheel_shaft_hole();
 
-		// Wheel lock nut
+		// Wheel hub nut
+		if (wheel_hub_nut)
 		translate([base_width/2, shaft_offset, 0]) hexagon(d=wheel_shaft_dia*2, h=5);
 
 		//Base mounting holes
 		base_mounting_holes();
 	}
 
-	if (show_motor_box) {
+	if (! hide_motor_box) {
 		motor_box();
 	}
 
